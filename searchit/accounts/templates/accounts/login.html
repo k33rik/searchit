@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_filters %}
+
+{% block title %} Логин {% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h3 class="card-title">Войти</h3>
+            <form method="POST" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-dark float-end">Войти</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

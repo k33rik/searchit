@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Список вакансий
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2>{{ vacanciescategory }}</h2>
+        {% for vacancy in vacanciescategory.vacancies %}
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ vacancy.title }}</h3>
+                    <h5 class="card-title bold">от {{ vacancy.salary }}₽</h5>
+                    <p>{{ vacancy.description }}</p>
+                </div>
+                {% if request.user.is_authenticated %}
+                    <div class="card-footer">
+                        <a class="btn btn-secondary float-end"
+                           href="{% url 'create_summary' vacancy.id %}">Откликнуться</a>
+                    </div>
+                {% else %}
+                    <a class="py-2 d-none d-md-inline-block btn btn-secondary"
+                       href="{% url 'register' %}">Регистрация</a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

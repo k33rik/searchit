@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_filters %}
+
+{% block title %}
+    Откликнуться
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-body">
+                <form method="POST" action="{% url 'create_summary' vacancy.id %}">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <button type="submit" class="btn btn-dark float-end">Откликнуться</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

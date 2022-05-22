@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}
+SearchIT
+{% endblock %}
+
+{% block content %}
+
+
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">SearchIT</h1>
+    <p class="lead">Мы поможем с выбором подходящей работы для IT-специалистов</p>
+</div>
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+
+        {% for el in card %}
+        <div class="col">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">{{ el.title }}</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title">от {{ el.price }}₽ <small class="text-muted">/
+                        мес.</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <pre style="font-family: sans-serif">{{ el.task }}</pre>
+                    </ul>
+                    <button type="button" class="btn btn-lg btn-block btn-secondary">Подробнее</button>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+    <div class="container accordion" id="accordionExample ">
+        <div class="accordion-item ">
+            <h2 class="accordion-header" id="headingTwo">
+                <button type="button" class="btn-secondary accordion-button collapsed alert-link"
+                        data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false"
+                        aria-controls="collapseTwo">
+                    Больше вакансий
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion collapse" aria-labelledby="headingTwo"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <div class="position-relative">
+                        <div class="row row-cols-4">
+                            {% for el in job %}
+                            <div class="col">
+                                <a class="text-dark" href="{% url 'vacancies_list' el.id %}">{{ el.title }}</a>
+                                <p class="opacity-50">{{ el.task }}</p>
+                            </div>
+                            {% endfor %}
+                            <!--  <ul>
+                                  <span class="badge bg-primary rounded-pill">14</span>
+                              </ul> --->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
