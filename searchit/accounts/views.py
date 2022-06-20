@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.views import LoginView, LogoutView, PasswordChangeView
@@ -40,7 +41,9 @@ def profile(request):
         form = ProfileEditForm(request.POST, instance=request.user)
 
         if form.is_valid():
+            messages.add_message(request, messages.SUCCESS, 'Данные были изменены')
             form.save()
+
         return HttpResponseRedirect(reverse_lazy('profile'))
 
     else:
